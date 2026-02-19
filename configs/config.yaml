@@ -1,0 +1,25 @@
+conversion:
+  opset_version: 17
+  dynamic_axes:
+    input: {0: "batch_size"}
+    output: {0: "batch_size"}
+
+optimization:
+  quantization:
+    type: "dynamic"
+    weight_type: "INT8"
+  graph_optimization:
+    level: "ORT_ENABLE_ALL"
+  mixed_precision:
+    enabled: true
+    dtype: "float16"
+
+benchmark:
+  warmup_runs: 50
+  num_runs: 1000
+  batch_sizes: [1, 4, 8, 16, 32]
+
+inference:
+  execution_providers: ["CUDAExecutionProvider", "CPUExecutionProvider"]
+  inter_op_threads: 4
+  intra_op_threads: 4
