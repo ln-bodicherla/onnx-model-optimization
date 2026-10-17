@@ -1,10 +1,10 @@
 # ONNX Model Optimization Pipeline
 
-Convert, optimize, and benchmark PyTorch models using ONNX Runtime and TensorRT. Achieve 40%+ latency reduction with dynamic batching and quantization. Supports vision and NLP models.
+Convert, optimize, and benchmark PyTorch models using ONNX Runtime, with graph optimization, quantization and dynamic batching. Supports vision and NLP models. (TensorRT is not implemented; the benchmark uses the ONNX Runtime execution providers set in `configs/config.yaml`, CPU by default.)
 
 ## Overview
 
-This pipeline provides an end-to-end workflow for taking trained PyTorch models through ONNX conversion, applying multiple optimization strategies, benchmarking performance gains, and serving optimized models through a high-performance inference server.
+This pipeline provides an end-to-end workflow for taking trained PyTorch models through ONNX conversion, applying multiple optimization strategies, benchmarking performance gains, and serving optimized models through a FastAPI inference server.
 
 ## Features
 
@@ -72,14 +72,7 @@ onnx-model-optimization/
 
 ## Optimization Results
 
-Typical results on NVIDIA T4 GPU with ResNet-50:
-
-| Model Version | Latency (ms) p95 | Throughput (img/s) | Size (MB) |
-|---------------|-------------------|--------------------|-----------|
-| PyTorch FP32  | 8.2               | 485                | 97.8      |
-| ONNX FP32     | 5.1               | 782                | 97.5      |
-| ONNX INT8     | 3.4               | 1170               | 24.8      |
-| ONNX FP16     | 2.9               | 1375               | 48.9      |
+No benchmark results are published in this repository. The Benchmark step in Quick Start (`ModelBenchmark.compare_models`) measures p50/p95/p99 latency, throughput and memory for each model file on your hardware, and `generate_report` / `plot_latency_comparison` save the results. Speedups depend heavily on model, hardware and execution provider.
 
 ## Configuration
 
